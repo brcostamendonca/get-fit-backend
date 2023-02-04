@@ -1,13 +1,18 @@
 var express = require('express');
 var app = express();
 var fs = require("fs");
-var generateApi = require('./api/generate');
+var generatePetNameApi = require('./api/generatePetName');
+var generateWorkoutApi = require('./api/generateWorkout');
 
 app.use(express.json())
 
 
 app.post('/generatePetName', function (req, res) {
-    generateApi.generatePetName(req,res);
+    generatePetNameApi.generatePetName(req,res);
+})
+
+app.post('/generateWorkout', function (req, res) {
+    generateWorkoutApi.generateWorkout(req,res);
 })
 
 
