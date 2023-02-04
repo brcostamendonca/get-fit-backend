@@ -26,7 +26,7 @@ exports.generateWorkout = async function (req, res) {
       model: "text-davinci-003",
       prompt: generatedPrompt,
       temperature: 1,
-      max_tokens: 2000
+      max_tokens: 3000
     });
     // console.log("completion: "+completion);
     // console.log(completion);
