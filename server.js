@@ -15,6 +15,11 @@ app.post('/generateWorkout', function (req, res) {
     generateWorkoutApi.generateWorkout(req,res);
 })
 
+app.get('/', function(req, res) {
+    res.json({ message: 'hooray! welcome to our api!' });   
+});
+
+
 
 
 // START THE SERVER
