@@ -6,7 +6,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-exports.generateWorkout = async function (req, res) {
+exports.generateWorkout = async function(req, res) {
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
@@ -33,8 +33,8 @@ exports.generateWorkout = async function (req, res) {
     // console.log(completion.data.choices);
 
     var myResult = makeValidJSON(completion.data.choices[0].text)
-    res.status(200).json({result: myResult});
-  } catch(error) {
+    res.status(200).json({ result: myResult });
+  } catch (error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
       console.error(error.response.status, error.response.data);
@@ -62,7 +62,7 @@ function generatePrompt(request) {
   For each day of the week there should be a atribute "description" which is the descriotion of the day (including the focus and benefits, and other info), and a atribute "type" which is the type of day "leg day", "rest day" or other. And there should be a "exercices" array of objects that are the exercices and have the atributes "name", "sets", "reps", "other_info" (all as strings).
   
   
-  Make sure the json is valid, and in the correct format, correct any mistakes in your answer before you give it!`;
+  Make sure the json is valid, and in the correct format, and the attributes names are all lower case, correct any mistakes in your answer before you give it!`;
 }
 
 function makeValidJSON(text) {
