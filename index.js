@@ -4,6 +4,7 @@ const cors = require('cors');
 var app = express();
 var generatePetNameApi = require('./api/generatePetName');
 var generateWorkoutApi = require('./api/generateWorkout');
+var generateMealPlan = require('./api/generateMealPlan');
 
 app.use(express.json())
 app.use(cors({
@@ -17,6 +18,11 @@ app.post('/generatePetName', function(req, res) {
 app.post('/generateWorkout', function(req, res) {
   generateWorkoutApi.generateWorkout(req, res);
 })
+
+app.post('/generateMealPlan', function(req, res) {
+  generateMealPlan.generateMealPlan(req, res);
+})
+
 
 app.get('/', function(req, res) {
   res.json({ message: 'hooray! welcome to our api!' });

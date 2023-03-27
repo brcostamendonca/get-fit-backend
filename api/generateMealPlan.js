@@ -6,7 +6,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-exports.generateWorkout = async function (req, res) {
+exports.generateMealPlan = async function (req, res) {
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
@@ -32,6 +32,15 @@ exports.generateWorkout = async function (req, res) {
       max_tokens: 3500
     });
 
+    // console.log("response: ");
+    // console.log(response);
+    // console.log("\n\n\n\n\ choices: ");
+    // console.log(response.choices);
+    // console.log("\n\n\n\n\ data: ");
+    // console.log(response.data);
+    // console.log("\n\n\n\n\ content: ");
+    // console.log(response.data.choices[0].message.content);
+
 
     var myResult = makeValidJSON(response.data.choices[0].message.content)
     res.status(200).json({ result: myResult });
@@ -55,14 +64,17 @@ function generatePrompt(request) {
 
   return `
   
-  Give me a workout plan for a week, adapted to my requirements:
+  Give me a meal plan for a single day, adapted to my requirements:
    ${request}
   
   
-  Give me an answer in valid json, with a object that has a variable for each day of the week (monday, tuesday, wednesday, thursday, friday, saturday, sunday).
-  For each day of the week there should be a atribute "description" which is the descriotion of the day (including the focus and benefits, and other info), and a atribute "type" which is the type of day "leg day", "rest day" or other. And there should be a "exercices" array of objects that are the exercices and have the atributes "name", "sets", "reps", "other_info" (all as strings).
-  
-  I do not want formatting stuff like \n and \t. Make sure the json is valid, and in the correct format, and the attributes names are all lower case, correct any mistakes in your answer before you give it! `;
+  Give me an answer in valid json, the return should be an array where each object represents a meal of the day.
+  Each meal should have a atribute "name".
+  Each meal should have a field "recipe", and the recipe should have a field "description", a field "preparation" and an array of ingredients called "ingredients". Each ingredient should have "name" (as string), "quantity" (as string) and "quantity_units" (as string).
+  Each meal should also have an object "nutritional_value" containing the nutritional value of the meal, including the parameters (all strings) "calories" (kcal), "protein" (grams), "fat" (grams), "carbs" (grams). There should also be a field "nutrional_calculation" explaing the math behind each nutrional value parameter.
+
+  I do not want formatting stuff like \n and \t. Make sure the json is valid, and in the correct format, and the attributes names are all lower case, correct any mistakes in your answer before you give it! Verify it is in valid json format! (only acceptable if it is!, if not fix it) `;
+
 }
 
 function makeValidJSON(text) {
