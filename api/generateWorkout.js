@@ -22,7 +22,7 @@ exports.generateWorkout = async function (req, res) {
     var generatedPrompt = generatePrompt(request);
     console.log(generatedPrompt);
 
-    const response = await openai.createChatCompletion ({
+    const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [{
         "role": "user",
@@ -62,7 +62,7 @@ function generatePrompt(request) {
   Give me an answer in valid json, with a object that has a variable for each day of the week (monday, tuesday, wednesday, thursday, friday, saturday, sunday).
   For each day of the week there should be a atribute "description" which is the descriotion of the day (including the focus and benefits, and other info), and a atribute "type" which is the type of day "leg day", "rest day" or other. And there should be a "exercices" array of objects that are the exercices and have the atributes "name", "sets", "reps", "other_info" (all as strings).
   
-  I do not want formatting stuff like \n and \t. Make sure the json is valid, and in the correct format, and the attributes names are all lower case, correct any mistakes in your answer before you give it! `;
+  I do not want formatting stuff like \\n and \\t. Make sure the json is valid, and in the correct format, and the attributes names are all lower case, correct any mistakes in your answer before you give it! `;
 }
 
 function makeValidJSON(text) {
