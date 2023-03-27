@@ -73,7 +73,7 @@ function generatePrompt(request) {
   Each meal should have a field "recipe", and the recipe should have a field "description", a field "preparation" and an array of ingredients called "ingredients". Each ingredient should have "name" (as string), "quantity" (as string) and "quantity_units" (as string).
   Each meal should also have an object "nutritional_value" containing the nutritional value of the meal, including the parameters (all strings) "calories" (kcal), "protein" (grams), "fat" (grams), "carbs" (grams). There should also be a field "nutrional_calculation" explaing the math behind each nutrional value parameter.
 
-  I do not want formatting stuff like \n and \t. Make sure the json is valid, and in the correct format, and the attributes names are all lower case, correct any mistakes in your answer before you give it! Verify it is in valid json format! (only acceptable if it is!, if not fix it) `;
+  I do not want formatting stuff like \\n and \\t. Make sure the json is valid, and in the correct format, and the attributes names are all lower case, correct any mistakes in your answer before you give it! Verify it is in valid json format! (only acceptable if it is!, if not fix it) `;
 
 }
 
